@@ -1,9 +1,27 @@
-import React from 'react';
+import React, { useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import { Form } from './Components/index';
 
 function App() {
+  const [formState, setFormState] = useState({
+    name: '',
+    email: '',
+    password: '',
+    termsRead: false
+  })
+
+  function formStringChange(event) {
+    setFormState(
+      // figure out the inside of this for string changes
+    )
+  }
+
+  function formCheckboxChange(event) {
+    setFormState(
+      //figure out the inside for the checkbox state update
+    )
+  }
   return (
     <div className="App">
       <header className="App-header">
