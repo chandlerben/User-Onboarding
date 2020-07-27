@@ -5,27 +5,31 @@ import { Form } from './Components/index';
 
 function App() {
   const [formState, setFormState] = useState({
-    name: '',
-    email: '',
-    password: '',
+    nameInput: '',
+    emailInput: '',
+    passwordInput: '',
     termsRead: false
   })
 
   function formStringChange(event) {
-    setFormState(
-      // figure out the inside of this for string changes
-    )
+    setFormState({
+      ...formState,
+      [event.target.name]: event.target.value
+    })
   }
 
   function formCheckboxChange(event) {
     setFormState(
-      //figure out the inside for the checkbox state update
+      {
+        ...formState,
+        termsRead: event.target.checked
+      }
     )
   }
   return (
     <div className="App">
       <header className="App-header">
-        <Form />
+        <Form formStringChange={formStringChange} formCheckboxChange={formCheckboxChange} />
         <img src={logo} className="App-logo" alt="logo" />
         <p>
           Edit <code>src/App.js</code> and save to reload.

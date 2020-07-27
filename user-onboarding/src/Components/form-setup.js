@@ -2,20 +2,22 @@ import React from 'react';
 import './components.css'
 
 const Form = props => {
+    const { formStringChange, formCheckboxChange } = props
+
     return (
         <div>
             <form className='formMainDiv'>
                 <label for='nameInput'>
-                    <input type='text' placeholder='Name' name='nameInput' id='nameInput' />
+                    <input onChange={formStringChange} type='text' placeholder='Name' name='nameInput' id='nameInput' />
                 </label>
                 <label for='emailInput'>
-                    <input type='text' placeholder='Email' name='emailInput' id='emailInput' />
+                    <input onChange={formStringChange} type='text' placeholder='Email' name='emailInput' id='emailInput' />
                 </label>
                 <label for='passwordInput'>
-                    <input type='text' placeholder='Password' name='passwordInput' id='passwordInput' />
+                    <input onChange={formStringChange} type='text' placeholder='Password' name='passwordInput' id='passwordInput' />
                 </label>
                 <label for='termsInput'>
-                    <input type='checkbox' name='termsInput' id='termInput' /> Terms of Services
+                    <input onChange={formCheckboxChange} type='checkbox' name='termsInput' id='termInput' /> Terms of Services
                 </label>
                 <label>
                     <input type='submit' />
