@@ -11,38 +11,53 @@ function App() {
     termsRead: false
   });
 
-  const { nameInput, setNameValid } = useState(true);
-  const { emailValid, setEmailValid } = useState(true);
-  const { passwordValid, setPasswordValid } = useState(true);
+  const [formValidState, setFormValidState] = useState({
+    nameValid: true,
+    emailValid: true,
+    passwordValid: true,
+    termsReadValid: false
+  });
+
 
   const firstUpdate = useRef(true);
-  const nameRegEx = /^[a-zA-Z\s]*$/
-  const emailRegEx = /^[a-zA-Z\s]*$/  //These need to be changed
-  const passwordRegEx = /^[a-zA-Z\s]*$/   //These need to be changed
+  const secondUpdate = useRef(true);
+  const thirdUpdate = useRef(true);
+  const nameRegEx = /^[a-zA-Z]+([ a-zA-Z]+)*$/
+  const emailRegEx = /\b[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}\b/
+  const passwordRegEx = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d!@#$%^&*]{8,}$/
 
   useEffect(() => {
     if (firstUpdate.current) {
       firstUpdate.current = false;
       return
     }
-    console.log(nameRegEx.test(formState.nameInput))
+    setFormValidState({
+      ...formValidState,
+      nameValid: nameRegEx.test(formState.nameInput),
+    });
   }, [formState.nameInput])
 
-  useEffect(() => {       //These need to be changed
-    if (firstUpdate.current) {
-      firstUpdate.current = false;
+  useEffect(() => {
+    if (secondUpdate.current) {
+      secondUpdate.current = false;
       return
     }
-    console.log(nameRegEx.test(formState.nameInput))
-  }, [formState.nameInput])
+    setFormValidState({
+      ...formValidState,
+      emailValid: emailRegEx.test(formState.emailInput),
+    })
+  }, [formState.emailInput])
 
   useEffect(() => {       //These need to be changed
-    if (firstUpdate.current) {
-      firstUpdate.current = false;
+    if (thirdUpdate.current) {
+      thirdUpdate.current = false;
       return
     }
-    console.log(nameRegEx.test(formState.nameInput))
-  }, [formState.nameInput])
+    setFormValidState({
+      ...formValidState,
+      passwordValid: passwordRegEx.test(formState.passwordInput),
+    })
+  }, [formState.passwordInput])
 
 
 
@@ -65,7 +80,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <Form formStringChange={formStringChange} formCheckboxChange={formCheckboxChange} />
+        <Form formStringChange={formStringChange} formCheckboxChange={formCheckboxChange} formValidState={formValidState} />
         <img src={logo} className="App-logo" alt="logo" />
         <p>
           Edit <code>src/App.js</code> and save to reload.
