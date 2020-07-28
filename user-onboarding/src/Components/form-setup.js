@@ -1,8 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './components.css'
 
 const Form = props => {
-    const { formStringChange, formCheckboxChange } = props
+    const { formStringChange, formCheckboxChange } = props;
+    const { nameValid, setNameValid } = useState(true);
+    const { emailValid, setEmailValid } = useState(true);
+    const { passwordValid, setPasswordValid } = useState(true);
+
 
     return (
         <div>
