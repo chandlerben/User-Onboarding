@@ -76,11 +76,12 @@ function App() {
         termsRead: event.target.checked
       }
     )
+    console.log(formState)
   }
   return (
     <div className="App">
       <header className="App-header">
-        <Form formStringChange={formStringChange} formCheckboxChange={formCheckboxChange} formValidState={formValidState} />
+        <Form formStringChange={formStringChange} formCheckboxChange={formCheckboxChange} formValidState={formValidState} formState={formState} />
         <img src={logo} className="App-logo" alt="logo" />
         <p>
           Edit <code>src/App.js</code> and save to reload.

@@ -1,15 +1,35 @@
-import React from 'react';
+import React, { useState } from 'react';
+import axios from 'axios';
 import './components.css'
 
 const Form = props => {
-    const { formStringChange, formCheckboxChange, formValidState } = props;
+
+    const { formStringChange, formCheckboxChange, formValidState, formState } = props;
+    const [errorMessage, setErrorMessage] = useState('');
 
 
+
+    const formSubmit = e => {
+        e.preventDefault();
+        console.log('submitted');
+        if (!formState.termsRead) {
+            setErrorMessage('You must accept the Terms & Conditions.');
+            return
+        }
+        else {
+            axios
+                .post("https://reqres.in/api/users", formState)
+                .then(res => {
+                    console.log(res);
+                })
+                .catch(err => console.log(err));
+        }
+    }
 
 
     return (
         <div>
-            <form className='formMainDiv'>
+            <form onSubmit={formSubmit} className='formMainDiv'>
                 <label for='nameInput'>
                     <input onChange={formStringChange} type='text' placeholder='Name' name='nameInput' id='nameInput' />
                 </label>
@@ -25,7 +45,7 @@ const Form = props => {
                 <label for='termsInput'>
                     <input onChange={formCheckboxChange} type='checkbox' name='termsInput' id='termInput' /> Terms of Services
                 </label>
-                <h2 className="formInvalid hidden">This is where the terms warning will go </h2>
+                <h2 className="formInvalid hidden">{errorMessage} </h2>
                 <label>
                     <input type='submit' />
                 </label>
