@@ -18,6 +18,8 @@ function App() {
     termsReadValid: false
   });
 
+  const [userData, setUserData] = useState([]);
+
 
   const firstUpdate = useRef(true);
   const secondUpdate = useRef(true);
@@ -25,6 +27,8 @@ function App() {
   const nameRegEx = /^[a-zA-Z]+([ a-zA-Z]+)*$/
   const emailRegEx = /\b[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}\b/
   const passwordRegEx = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d!@#$%^&*]{8,}$/
+
+
 
   useEffect(() => {
     if (firstUpdate.current) {
@@ -48,7 +52,7 @@ function App() {
     })
   }, [formState.emailInput])
 
-  useEffect(() => {       //These need to be changed
+  useEffect(() => {
     if (thirdUpdate.current) {
       thirdUpdate.current = false;
       return
@@ -58,9 +62,6 @@ function App() {
       passwordValid: passwordRegEx.test(formState.passwordInput),
     })
   }, [formState.passwordInput])
-
-
-
 
   function formStringChange(event) {
     setFormState({
@@ -81,7 +82,8 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <Form formStringChange={formStringChange} formCheckboxChange={formCheckboxChange} formValidState={formValidState} formState={formState} />
+
+        <Form formStringChange={formStringChange} formCheckboxChange={formCheckboxChange} formValidState={formValidState} formState={formState} userData={userData} setUserData={setUserData} />
         <img src={logo} className="App-logo" alt="logo" />
         <p>
           Edit <code>src/App.js</code> and save to reload.

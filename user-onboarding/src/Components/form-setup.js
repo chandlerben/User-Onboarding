@@ -4,8 +4,9 @@ import './components.css'
 
 const Form = props => {
 
-    const { formStringChange, formCheckboxChange, formValidState, formState } = props;
+    const { formStringChange, formCheckboxChange, formValidState, formState, userData, setUserData } = props;
     const [errorMessage, setErrorMessage] = useState('');
+
 
 
 
@@ -20,7 +21,9 @@ const Form = props => {
             axios
                 .post("https://reqres.in/api/users", formState)
                 .then(res => {
+                    setUserData(userData.push(res.data));
                     console.log(res);
+                    console.log(userData)
                 })
                 .catch(err => console.log(err));
         }
